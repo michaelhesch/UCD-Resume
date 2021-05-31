@@ -37,12 +37,14 @@ function repoInformationHTML(repos) {
 }
 
 function fetchGitHubInformation(event) {
+  $("#gh-user-data").html("");
+  $("#gh-repo-data").html("");
 
   var username = $("#gh-username").val();
   if (!username) {
     $("#gh-user-data").html(`<h2>Please enter a GitHub username</h2>`);
     return;
-  }
+  };
 
   $("#gh-user-data").html (
     `<div id="loader">
@@ -50,7 +52,7 @@ function fetchGitHubInformation(event) {
     </div>`);
 
   $.when(
-    $.getJSON(`https://api.github.com/users/${username}`)
+    $.getJSON(`https://api.github.com/users/${username}`),
     $.getJSON(`https://api.github.com/users/${username}/repos`)
   ).then(
     function(firstResponse, secondResponse) {
